@@ -25,9 +25,12 @@ OpenSCAD designs for 3D-printable stands/brackets to support a scooter under a b
 
 ## TODO
 
-- [ ] Upload project to GitHub
+- [x] Upload project to GitHub
 - [ ] Test print and verify dimensions
 - [ ] Adjust reinforcements if needed after testing
+
+## Repository
+https://github.com/kwad-pylot/scooter-under-bed-stand
 
 ---
 
