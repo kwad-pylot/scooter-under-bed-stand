@@ -1,0 +1,34 @@
+# Claude Code local settings
+.claude/
+
+# OpenSCAD generated files
+*.stl
+*.3mf
+*.amf
+*.off
+*.dxf
+*.svg
+*.csg
+*.echo
+*.png
+*.gif
+
+# Backup files
+*.scad~
+*.bak
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE/Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.temp
