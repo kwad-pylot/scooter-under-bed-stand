@@ -4,7 +4,7 @@
 
 // Parameters (in mm)
 length = 200;               // Length of the bracket (extrusion direction)
-base_width_right = 95;     // Width of base extending to the RIGHT of vertical wall
+base_width_right = 80;     // Width of base extending to the RIGHT of vertical wall
 base_width_left = 40;      // Width of base extending to the LEFT of vertical wall
 height = 95;               // Height of the vertical wall
 wall_thickness = 10;       // Thickness of the walls
@@ -19,7 +19,7 @@ inner_fillet_radius = 3;   // Inner corner fillet radius (in mm)
 add_gussets = true;        // Enable corner gussets
 gusset_size = 80;          // Size of triangular gusset (mm)
 gusset_margin = 10;        // Gap between gusset edge and base/wall edge (mm)
-num_gussets = 4;           // Number of gussets along the length
+num_gussets = 3;           // Number of gussets along the length
 // ==========================================
 
 // Resolution for smooth curves
