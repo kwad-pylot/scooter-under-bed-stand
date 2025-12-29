@@ -6,7 +6,7 @@
 length = 200;               // Length of the bracket (extrusion direction)
 base_width_right = 80;     // Width of base extending to the RIGHT of vertical wall
 base_width_left = 40;      // Width of base extending to the LEFT of vertical wall
-height = 95;               // Height of the vertical wall
+height = 105;               // Height of the vertical wall
 wall_thickness = 10;       // Thickness of the walls
 
 // ========== FILLET CONTROL ==========
@@ -18,7 +18,8 @@ inner_fillet_radius = 3;   // Inner corner fillet radius (in mm)
 // ========== GUSSET REINFORCEMENT ==========
 add_gussets = true;        // Enable corner gussets
 gusset_size = 80;          // Size of triangular gusset (mm)
-gusset_margin = 10;        // Gap between gusset edge and base/wall edge (mm)
+gusset_margin = 5;         // Gap between gusset edge and base/wall edge (mm)
+gusset_rib_width = 20;     // Width of diagonal rib (material to keep along hypotenuse)
 num_gussets = 3;           // Number of gussets along the length
 // ==========================================
 
@@ -101,15 +102,35 @@ module T_bracket_filleted() {
         }
 }
 
-// Triangular gusset module (can be rectangular triangle)
+// Triangular gusset module with inner cutout (can be rectangular triangle)
 module gusset(width, height, thickness) {
-    // Triangle in the XY plane, extruded along Z
-    linear_extrude(height = thickness)
-        polygon(points = [
-            [0, 0],
-            [width, 0],
-            [0, height]
-        ]);
+    // Triangle in the XY plane with cutout for weight reduction, extruded along Z
+    linear_extrude(height = thickness) {
+        difference() {
+            // Original outer triangle
+            polygon(points = [
+                [0, 0],
+                [width, 0],
+                [0, height]
+            ]);
+
+            // Inner cutout triangle - leaves gusset_rib_width material along hypotenuse
+            // Calculate the cutout size to leave the desired rib width
+            hyp = sqrt(width*width + height*height);  // Hypotenuse length
+            offset_val = width*height - gusset_rib_width*hyp;  // Offset calculation
+            cutout_base_x = offset_val / height;  // X point on base
+            cutout_vert_y = offset_val / width;   // Y point on vertical
+
+            // Only add cutout if there's enough material
+            if (cutout_base_x > 0 && cutout_vert_y > 0) {
+                polygon(points = [
+                    [0, 0],
+                    [cutout_base_x, 0],
+                    [0, cutout_vert_y]
+                ]);
+            }
+        }
+    }
 }
 
 // T bracket with gusset reinforcements
@@ -123,7 +144,7 @@ module T_bracket_with_gussets() {
     max_gusset_width = base_width_right - wall_thickness - gusset_margin;  // Available space on right base
     max_gusset_height = height - wall_thickness - gusset_margin;  // Available space on vertical wall
     actual_gusset_width = min(gusset_size, max_gusset_width);  // Limit by base width and gusset_size
-    actual_gusset_height = min(gusset_size, max_gusset_height);  // Limit by wall height and gusset_size
+    actual_gusset_height = max_gusset_height;  // Always follow the wall height (no gusset_size limit)
 
     union() {
         // Base T bracket - choose filleted or simple based on add_fillets parameter
