@@ -1,29 +1,33 @@
 // Scooter Under Bed Stand - T BRACKET VERSION
 // Modified L-bracket with base extending both left and right from vertical wall
+// Default: 200mm length, 95mm right base, 40mm left base, 95mm height
 
-/* [Main Dimensions] */
+// Parameters (in mm)
 length = 200;               // Length of the bracket (extrusion direction)
-base_width_right = 70;      // Width of base extending to the RIGHT of vertical wall
-base_width_left = 70;       // Width of base extending to the LEFT of vertical wall
+base_width_right = 80;     // Width of base extending to the RIGHT of vertical wall
+base_width_left = 40;      // Width of base extending to the LEFT of vertical wall
 height = 105;               // Height of the vertical wall
-wall_thickness = 10;        // Thickness of the walls
+wall_thickness = 10;       // Thickness of the walls
 
-/* [Fillet Control] */
-add_fillets = false;        // Enable/disable all rounded corners and edges
-fillet_radius = 3;          // Outer fillet radius (in mm)
-inner_fillet_radius = 3;    // Inner corner fillet radius (in mm)
+// ========== FILLET CONTROL ==========
+add_fillets = false;       // Enable/disable all rounded corners and edges
+fillet_radius = 3;         // Outer fillet radius (in mm)
+inner_fillet_radius = 3;   // Inner corner fillet radius (in mm)
+// =====================================
 
-/* [Gusset Reinforcement] */
-add_gussets_left = true;    // Enable LEFT side gussets
-add_gussets_right = true;   // Enable RIGHT side gussets
-gusset_size = 70;           // Size of triangular gusset (mm)
-gusset_thickness = 5;       // Thickness of each gusset (mm)
-gusset_margin = 10;         // Gap between gusset edge and base/wall edge (mm)
-gusset_rib_width = 20;      // Width of diagonal rib (material to keep along hypotenuse)
-num_gussets = 3;            // Number of gussets along the length
 
-/* [Advanced] */
-$fn = 40;                   // Resolution for smooth curves
+// ========== GUSSET REINFORCEMENT ==========
+add_gussets_left = true;   // Enable LEFT side gussets
+add_gussets_right = true;  // Enable RIGHT side gussets
+gusset_size = 80;          // Size of triangular gusset (mm)
+gusset_thickness = 5;      // Thickness of each gusset (mm)
+gusset_margin = 5;         // Gap between gusset edge and base/wall edge (mm)
+gusset_rib_width = 20;     // Width of diagonal rib (material to keep along hypotenuse)
+num_gussets = 3;           // Number of gussets along the length
+// ==========================================
+
+// Resolution for smooth curves
+$fn = 40;
 
 // Basic T-shape profile (2D)
 // The vertical wall sits on top of a base that extends both directions
